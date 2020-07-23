@@ -1,14 +1,21 @@
 import hashlib
-## this is an added feature to ensure a disk that hasn't been in use for a while is still worth trusting
 
+# https://stackoverflow.com/a/44873382
 
-file = "cli.py"  ## NEED TO CHANGE
-BLOCK_SIZE = 65536 
+def sha512sum(filename): #named after linux util of same name
+    """
+    takes a filename and then iterates over that file adding to the sha512 hash until completed - returns sha512
+    using sha512 to prevent accidental colisions
+    
+    below code is within 20% of sha512sum util 
 
-with open(file, 'rb') as f: # Open the file to read it's bytes
-    fb = f.read(BLOCK_SIZE) # Read from the file. Take in the amount declared above
-    while len(fb) > 0: # While there is still data being read from the file
-        file_hash.update(fb)
-        fb = f.read(BLOCK_SIZE) 
-
-print (file_hash.hexdigest())
+    >>>sha512sum("somefile")
+    '10943f902f1760d7ff458f10ecfa8f790d6b0988455a5e8a545473abc53454294874c88e2e1ece57f6b7b353716a441f31a1af555b130125a827557ce436fe50'
+    """
+    h  = hashlib.sha512() 
+    b  = bytearray(128*1024)
+    mv = memoryview(b)
+    with open(filename, 'rb', buffering=0) as f:
+        for n in iter(lambda : f.readinto(mv), 0):
+            h.update(mv[:n])
+    return h.hexdigest()
