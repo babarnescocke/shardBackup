@@ -1,9 +1,29 @@
-import argparse
+from argparse import ArgumentParser, Action
+import bitmath
 
-parser = create.argparse(description='Take in params for sharding data')
-parser.add_argument('src', metavar='S', type=string, help='source dir structure to be be sharded to target')
-parser.add_argument('target', metavar='T', type=string, help='target for copying to')
-parser.add_argument('--index', metavar='I', type=int, help='index of where you would like to start backing up from. e.g. you have already backed up the first 3 Tb so start at 3 Terabytes')
-parser.add_argument('--hash-off', metavar='H', type=bool, help='turn off hashing of each file during writing - NOT RECCOMENDED')
+# Handle CLI options
+# relied heavil on https://linuxacademy.com/cp/courses/lesson/course/3802/lesson/3
 
-args = parser.parse_arges()
+class ByteAction(Action):
+     def __call__(self, parser, namespace, values, option_string=None)
+     '''
+     turns input of xB, xKi, xMi, xGi, xTi, xPi or xEi IEC into Bytes
+     '''
+        bitmath.parse_string_unsafe("", system=bitmath.NIST).to_Byte()
+
+
+def create_parser():
+    parser = ArgumentParser(description="""
+        backup large directory structure to multiple smaller directories/devices.
+        """)
+    parser.add_argument("source", help="Directory to copy from")
+    parser.add_argument("target", help="Directory to copy to")
+    parser.add_argument("--index",
+        help="Where to start in dir. eg 2G wouldn't backup the first 2 Gibibytes",
+        nargs=2
+        )
+    parser.add_argument("--endIndex",
+        help="where to stop in dir. eg 2G would stop after backing up 2 Gibibytes",
+        nargs=2)
+
+    return parser
