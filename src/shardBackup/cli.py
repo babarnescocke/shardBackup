@@ -17,7 +17,7 @@ def create_parser():
     parser = ArgumentParser(description="""
         backup large directory structure to multiple smaller directories/devices.
         """)
-    parser.add_argument("source_directory", type=string, help="Directory to copy from")
+    parser.add_argument("source_directory", help="Directory to copy from")
     parser.add_argument("target_directory", help="Directory to copy to")
     parser.add_argument("--index", "-i",
         help="""
