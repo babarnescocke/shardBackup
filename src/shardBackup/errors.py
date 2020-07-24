@@ -13,3 +13,4 @@ def dirWritable(dirname):
 
 def progExists(progname):
     return which(progname) is not None
+

@@ -9,6 +9,7 @@ class ByteAction(Action):
      def __call__(self, parser, namespace, values, option_string=None)
      '''
      turns input of xB, xKi, xMi, xGi, xTi, xPi or xEi IEC into Bytes
+     
      '''
         bitmath.parse_string_unsafe("", system=bitmath.NIST).to_Byte()
 
