@@ -1,5 +1,6 @@
 from argparse import ArgumentParser, Action
 import bitmath
+import shutil
 
 # Handle CLI options
 # relied heavil on https://linuxacademy.com/cp/courses/lesson/course/3802/lesson/3
@@ -27,3 +28,10 @@ def create_parser():
         nargs=2)
 
     return parser
+
+'''
+class DiskAction():
+    def __call__ (self, parser,)
+    total, used, free = shutil.disk_usage('dir')
+
+"""
