@@ -22,7 +22,7 @@ def rsync(fobject0, fobject1): # takes two file objects and transmits 0 to 1
         print(f"Unable to launch rsync copying - despite finding rsync installed")
         exit(1)
 
-def copy(fobject0, fobject1): #copies file and then changes perms/owner
+def copy(fobject0, fobject1): #copies file and then changes perms/owner - https://stackoverflow.com/questions/19787348/copy-file-keep-permissions-and-owner
     try:
         copy2(fobject0, fobject1)
         st = os.stat(fobject0)
