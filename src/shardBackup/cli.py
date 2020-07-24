@@ -17,8 +17,8 @@ def create_parser():
     parser = ArgumentParser(description="""
         backup large directory structure to multiple smaller directories/devices.
         """)
-    parser.add_argument("source_directory", help="Directory to copy from")
-    parser.add_argument("target_directory", help="Directory to copy to")
+    parser.add_argument("source directory", help="Directory to copy from")
+    parser.add_argument("target directory", help="Directory to copy to")
     parser.add_argument("--index", "-i",
         help="""
         Where to start in dir. eg 2G wouldn't backup the first 2 Gibibytes. 1k=1KiB 2M=2MiB etc (defaults to 0 Bytes)
@@ -27,9 +27,9 @@ def create_parser():
         default='0B'
         )
     parser.add_argument("--endindex", "-e",
-        help="where to stop in dir. eg 2G would stop after backing up 2 Gibibytes, read --index for more, (defaults to available space in target_directory",
+        help="where to stop in dir. eg 2G would stop after backing up 2 Gibibytes, read --index for more, (defaults to available space in target directory)",
         nargs=1
-        ) # need to add defau;t
+        ) # need to add_argument default
     parser.add_argument("--quiet", "-q",
         help="program defaults to verbose, --quiet sets output to --quiet")
     parser.add_argument("--rsync", "-r",
