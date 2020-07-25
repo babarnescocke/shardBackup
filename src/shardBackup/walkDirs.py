@@ -11,20 +11,11 @@ def recurse_dir(root_dir):
     root_dir = os.path.relpath(root_dir)
     for item in os.listdir(root_dir):
         item_full_path = os.path.join(root_dir, item)
-        if os.path.isdir(item_full_path):
-            recurse_dir(item_full_path)
-        else:
-            print(f"{os.stat(item_fu    ll_path).st_size}   {item_full_path}")
-
-
-""" pseudo code:
-size = 0b
-dsize = 4k
-targsize = lots of bytes
-walk dir
-  if file
-    fsize = file_size + 131 bytes + len("basename of file".encode('utf-8'))
-    if fsize + size <= targetsize
-  if dir
-    dsize + 
-"""
+        if os.path.isdir(item_full_path): #if current object being iterated over is dir, keep iterating inthat subfolder
+            try:
+                recurse_dir(item_full_path)
+            except PermissionError:
+                print(f"Permission Denied in {item_full_path}") # this covers instances where the root source dir may be readabl/permissible but some subdir isn't
+        else: # if an object isn't a dir we treat it as a file
+            obj = {'fobject' : item_full_path, 'fobject_size' : os.stat(item_full_path).st_size}
+            print(f"{obj}")
