@@ -5,8 +5,8 @@ def recurse_dir(root_dir):
     """
     Used to walk a given dir. recursively and print out files
     >>>
-    >>>root_dir("")
-    shardBackup/Pipfile - 138 bytes
+    >>>root_dir("./")
+    {'fobject': '../testDir/face', 'fobject_size': 0}
     """
     root_dir = os.path.relpath(root_dir)
     for item in os.listdir(root_dir):
@@ -19,3 +19,4 @@ def recurse_dir(root_dir):
         else: # if an object isn't a dir we treat it as a file
             obj = {'fobject' : item_full_path, 'fobject_size' : os.stat(item_full_path).st_size}
             print(f"{obj}")
+            
